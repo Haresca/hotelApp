@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 //Llamamos las rutas.
-app.use('/api/cliente', require('./routers/cliente'))
-app.use('/api/habitacion', require('./routers/habitacion'))
+app.use('/api/cliente', require('./routers/cliente'));
+app.use('/api/habitacion', require('./routers/habitacion'));
 
 
 app.listen(5000, () => {

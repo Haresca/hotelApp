@@ -39,16 +39,15 @@
                                 <td>
                                     <i [routerLink]="['/actualizar-administrador', administrador._id]"
                                         class="fas fa-edit text-primary"></i>
-                                    <i (click)="eliminarAdministrador(administrador._id)" class="fas fa-trash text-danger">
-                                         </table>
-                                            <h5 *ngIf="listaAdministradores.length == 0"
-                                                style="text-align: start; margin-top: 10px;">Ho hay administradores para
-                                                mostrar, registre algunos primero.</h5>
-
-                                                
+                                    <i (click)="eliminarAdministrador(administrador._id)"
+                                        class="fas fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+                    </table>
+                    <h5 *ngIf="listaAdministradores.length == 0" style="text-align: start; margin-top: 10px;">Ho hay
+                        administradores para mostrar, registre algunos primero.</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

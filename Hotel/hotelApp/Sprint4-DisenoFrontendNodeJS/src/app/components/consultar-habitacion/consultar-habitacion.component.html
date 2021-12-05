@@ -29,13 +29,12 @@
                                 <td>
                                     <i [routerLink]="['/actualizar-habitacion', habitacion._id]"
                                         class="fas fa-edit text-primary"></i>
-                                    <i (click)="eliminarHabitacion(habitacion._id)" class="fas fa-trash text-danger">
-                                         </table>
-                                            <h5 *ngIf="listaHabitaciones.length == 0"
-                                                style="text-align: start; margin-top: 10px;">Ho hay habitaciones para
-                                                mostrar, registre algunas primero.</h5>
-
-                                                
+                                    <i (click)="eliminarHabitacion(habitacion._id)" class="fas fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 *ngIf="listaHabitaciones.length == 0" style="text-align: start; margin-top: 10px;">Ho hay habitaciones para mostrar, registre algunas primero.</h5>                          
                 </div>
             </div>
         </div>

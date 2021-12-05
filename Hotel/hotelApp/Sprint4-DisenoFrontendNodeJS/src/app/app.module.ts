@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,8 @@ import { RegistrarHabitacionComponent } from './components/registrar-habitacion/
 import { RegistrarAdministradorComponent } from './components/registrar-administrador/registrar-administrador.component';
 import { ConsultarHabitacionComponent } from './components/consultar-habitacion/consultar-habitacion.component';
 import { ConsultarAdministradorComponent } from './components/consultar-administrador/consultar-administrador.component';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ConsultarAdministradorComponent } from './components/consultar-administ
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

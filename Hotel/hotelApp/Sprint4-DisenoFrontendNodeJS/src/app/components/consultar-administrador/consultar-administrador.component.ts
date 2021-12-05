@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Administrador } from 'src/app/models/Administrador';
 import { AdministradorService } from 'src/app/services/administrador.service';
 
@@ -8,15 +9,18 @@ import { AdministradorService } from 'src/app/services/administrador.service';
   styleUrls: ['./consultar-administrador.component.css']
 })
 export class ConsultarAdministradorComponent implements OnInit {
-  listaAdministradores: Administrador[] =[];
-  constructor(private _administradorService: AdministradorService) { }
+
+  listaAdministradores: Administrador[] = [];
+  
+  constructor(private _administradorService: AdministradorService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.consultarTodosAdministradores();
   }
 
 
-  consultarTodosAdministradores(){
+  consultarTodosAdministradores() {
     this._administradorService.getAdministrador().subscribe(data => {
       console.log(data);
       this.listaAdministradores = data;
@@ -25,9 +29,9 @@ export class ConsultarAdministradorComponent implements OnInit {
     })
   }
 
-  eliminarAdministrador(id: any){
+  eliminarAdministrador(id: any) {
     this._administradorService.eliminarAdministrador(id).subscribe(data => {
-      console.log(data);
+      this.toastr.error('Administrador eliminado correctamente', 'Administrador');
       this.consultarTodosAdministradores();
     }, error => {
       console.log(error);

@@ -39,13 +39,13 @@
                                 <td>
                                     <i [routerLink]="['/actualizar-cliente', client._id]"
                                         class="fas fa-edit text-primary"></i>
-                                    <i (click)="eliminarCliente(client._id)" class="fas fa-trash text-danger">
-                                         </table>
-                                            <h5 *ngIf="listaClientes.length == 0"
-                                                style="text-align: start; margin-top: 10px;">Ho hay clientes para
-                                                mostrar, registre algunos primero.</h5>
-
-                                                
+                                    <i (click)="eliminarCliente(client._id)" class="fas fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+                    </table>
+                    <h5 *ngIf="listaClientes.length == 0" style="text-align: start; margin-top: 10px;">Ho hay clientes
+                        para mostrar, registre algunos primero.
+                    </h5>
                 </div>
             </div>
         </div>
