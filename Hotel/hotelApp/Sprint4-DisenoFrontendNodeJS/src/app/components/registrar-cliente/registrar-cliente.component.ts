@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Cliente } from 'src/app/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 
@@ -16,17 +17,19 @@ export class RegistrarClienteComponent implements OnInit {
   id: string | null;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private _clienteService: ClienteService,
-    private aRouter: ActivatedRoute) {
-    this.clienteForm = this.fb.group({
+    private aRouter: ActivatedRoute,
+    private toastr: ToastrService)
+    {
+    this.clienteForm = this.formBuilder.group({
       tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
       primerNombre: ['', Validators.required],
-      segundoNombre: ['', Validators.required],
+      segundoNombre: ['', Validators.nullValidator],
       primerApellido: ['', Validators.required],
-      segundoApellido: ['', Validators.required],
+      segundoApellido: ['', Validators.nullValidator],
       email: ['', Validators.required],
       direccion: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
@@ -36,6 +39,7 @@ export class RegistrarClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.esEditar();
   }
 
   registrarCliente() {
@@ -54,15 +58,16 @@ export class RegistrarClienteComponent implements OnInit {
       fechaNacimiento: this.clienteForm.get('fechaNacimiento')?.value,
       telefono: this.clienteForm.get('telefono')?.value
     }
-if(this.id != null){ //Significa que va a llamar el eliminar y de ahí actualiza el nuevo registro.
+    if(this.id != null){ //Significa que va a llamar el eliminar y de ahí actualiza el nuevo registro.
       this._clienteService.editarCliente(this.id, CLIENTE).subscribe( data => {
+        this.toastr.info('Cliente actualizado correctamente', 'Cliente');
         this.router.navigate(['/']);
       }, error => {
         console.log(error);
         this.clienteForm.reset();
-      })
+      });
     }
-else{ //Si va por este lado, entonces va a realizar un registro normal.
+    else{ //Si va por este lado, entonces va a realizar un registro normal.
       console.log(CLIENTE);
       this._clienteService.guardarCliente(CLIENTE).subscribe( data => {
         this.mensajeGuardar();
@@ -72,5 +77,29 @@ else{ //Si va por este lado, entonces va a realizar un registro normal.
         this.clienteForm.reset();
       }) 
     } 
-}
+  }
+
+  private mensajeGuardar(): void {
+    this.toastr.info('Cliente registrado correctamente', 'Cliente');
+  }
+
+  esEditar(): void {
+    if(this.id != null){
+      this.titulo = "editar cliente";
+      this._clienteService.consultarClienteId(this.id).subscribe(data => {
+        this.clienteForm.setValue({
+          tipoDocumento: data.tipoDocumento,
+          numeroDocumento: data.numeroDocumento,
+          primerNombre: data.primerNombre,
+          segundoNombre: data.segundoNombre,
+          primerApellido: data.primerApellido,
+          segundoApellido: data.segundoApellido,
+          email: data.email,
+          direccion: data.direccion,
+          fechaNacimiento: data.fechaNacimiento,
+          telefono: data.telefono
+        });
+      });
+    }
+  }
 }
