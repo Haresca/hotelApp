@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">LISTADO DE ADMINISTRADORES</span>
+                    <button class="btn btn-success float-end" routerLink="/registrar-administrador">Nuevo</button>
+                    <table *ngIf="listaAdministradores.length > 0" class="table table-striped table-hove mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">tipoDocumento</th>
+                                <th scope="col">numeroDocumento</th>
+                                <th scope="col">primerNombre</th>
+                                <th scope="col">segundoNombre</th>
+                                <th scope="col">primerApellido</th>
+                                <th scope="col">segundoApellido</th>
+                                <th scope="col">email</th>
+                                <th scope="col">direccion</th>
+                                <th scope="col">fechaNacimiento</th>
+                                <th scope="col">telefono</th>
+                                <th scope="col"></th>
+
+                                <!--Espacio para agregar los iconos de la tabla, eliminar actualizar.-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let administrador of listaAdministradores">
+                                <td>{{ administrador.tipoDocumento }}</td>
+                                <td>{{ administrador.numeroDocumento }}</td>
+                                <td>{{ administrador.primerNombre }}</td>
+                                <td>{{ administrador.segundoNombre }}</td>
+                                <td>{{ administrador.primerApellido }}</td>
+                                <td>{{ administrador.segundoApellido }}</td>
+                                <td>{{ administrador.email }}</td>
+                                <td>{{ administrador.direccion }}</td>
+                                <td>{{ administrador.fechaNacimiento }}</td>
+                                <td>{{ administrador.telefono }}</td>
+
+                                <td>
+                                    <i [routerLink]="['/actualizar-administrador', administrador._id]"
+                                        class="fas fa-edit text-primary"></i>
+                                    <i (click)="eliminarAdministrador(administrador._id)" class="fas fa-trash text-danger">
+                                         </table>
+                                            <h5 *ngIf="listaAdministradores.length == 0"
+                                                style="text-align: start; margin-top: 10px;">Ho hay administradores para
+                                                mostrar, registre algunos primero.</h5>
+
+                                                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
